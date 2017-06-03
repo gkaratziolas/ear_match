@@ -62,6 +62,9 @@ int main( int argc, const char** argv )
                 c = waitKey(10);
                 while ( (char)c != ' ' ){
                     c = waitKey(10);
+                    if( (char)c == 'a' ) {
+                        saved_ear = ear_hull;
+                    }
                 }
             }
 
@@ -170,11 +173,11 @@ void createEarDescriptor(){
     imshow("Canny", can);
 
     // Run a morphological close on the image to bridge any gaps
-    int morph_size = 5;
-    Mat element = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(morph_size, morph_size));
+    //int morph_size = 5;
+    //Mat element = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(morph_size, morph_size));
     //morphologyEx(can, can, MORPH_CLOSE, element, Point(-1, -1), 1);
-    namedWindow("morph", WINDOW_AUTOSIZE);
-    imshow("morph", can);
+    //namedWindow("morph", WINDOW_AUTOSIZE);
+    //imshow("morph", can);
 
     /// Find contours and convx hulls
     findContours( can, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
@@ -195,6 +198,7 @@ void createEarDescriptor(){
         for( int i = 0; i < hull[1].size(); i++ ){ 
             hull[0].push_back(hull[1][i]);
         }
+
         ear_hull = hull[0];
         drawContours( drawing, hull, 0, Scalar(0,255,0), CV_FILLED, 8, vector<Vec4i>(), 0, Point() );
 
