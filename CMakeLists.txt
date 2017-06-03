@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( ear_match )
+find_package( OpenCV REQUIRED )
+add_executable( ear_match ear_match.cpp )
+target_link_libraries( ear_match ${OpenCV_LIBS} )
