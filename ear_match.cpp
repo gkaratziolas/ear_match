@@ -173,11 +173,11 @@ void createEarDescriptor(){
     imshow("Canny", can);
 
     // Run a morphological close on the image to bridge any gaps
-    //int morph_size = 5;
-    //Mat element = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(morph_size, morph_size));
-    //morphologyEx(can, can, MORPH_CLOSE, element, Point(-1, -1), 1);
-    //namedWindow("morph", WINDOW_AUTOSIZE);
-    //imshow("morph", can);
+    int morph_size = 5;
+    Mat element = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(morph_size, morph_size));
+    morphologyEx(can, can, MORPH_CLOSE, element, Point(-1, -1), 3);
+    namedWindow("morph", WINDOW_AUTOSIZE);
+    imshow("morph", can);
 
     /// Find contours and convx hulls
     findContours( can, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
